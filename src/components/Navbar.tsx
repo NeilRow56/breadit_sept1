@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import ThemeButton from './ThemeButton'
+import { buttonVariants } from './ui/button'
+import { HandMetal } from 'lucide-react'
+;<HandMetal />
 
 const Navbar = () => {
   return (
@@ -7,10 +10,21 @@ const Navbar = () => {
       <nav className="container mx-auto flex items-center justify-between px-48">
         <ul className="flex gap-6">
           <li>
-            <Link href="/">Home</Link>
+            <Link className="flex gap-2" href="/">
+              <HandMetal />
+              <h3 className="font-semibold text-blue-900">Home</h3>
+            </Link>
           </li>
         </ul>
-        <ThemeButton />
+        <ul className="flex items-center gap-4">
+          <li>
+            <Link className={buttonVariants()} href="/sign-in">
+              Sign in
+            </Link>
+          </li>
+
+          <ThemeButton />
+        </ul>
       </nav>
     </header>
   )
