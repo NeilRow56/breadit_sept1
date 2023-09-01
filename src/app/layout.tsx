@@ -27,7 +27,7 @@ export default function RootLayout({
         inter.className
       )}
     >
-      <body className="flex h-screen flex-col bg-slate-50 antialiased">
+      <body className="flex h-screen flex-col bg-gray-100 antialiased">
         <Providers>
           <Navbar />
           <div className="container mx-auto flex max-w-7xl flex-grow  ">

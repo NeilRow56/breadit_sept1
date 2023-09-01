@@ -7,7 +7,7 @@ import { HandMetal } from 'lucide-react'
 const Navbar = () => {
   return (
     <header className="sticky top-0 z-[70] bg-slate-200 py-6 dark:bg-slate-700">
-      <nav className="container mx-auto flex items-center justify-between px-48">
+      <nav className="container mx-auto flex items-center justify-between sm:px-48">
         <ul className="flex gap-6">
           <li>
             <Link className="flex gap-2" href="/">
@@ -16,7 +16,7 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <ul className="flex items-center gap-4">
+        <ul className="flex items-center gap-4 ">
           <li>
             <Link className={buttonVariants()} href="/sign-in">
               Sign in
