@@ -3,7 +3,8 @@
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import {
   Form,
@@ -32,6 +33,8 @@ const FormSchema = z
   })
 
 export const SignUpForm = () => {
+  const router = useRouter()
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -44,7 +47,22 @@ export const SignUpForm = () => {
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     // Register User
-    console.log(values)
+    const response = await fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      }),
+    })
+    if (response.ok) {
+      router.push('/sign-in')
+    } else {
+      console.error('Registration failed')
+    }
   }
 
   return (
