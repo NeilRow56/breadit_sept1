@@ -7,29 +7,31 @@ import { db } from './db'
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
 
-  session: {
-    strategy: 'jwt',
-  },
-
-  pages: {
-    signIn: '/sign-in',
-  },
-
   providers: [
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { label: 'email', type: 'text' },
+        // email: { label: 'email', type: 'text' },
+        username: { label: 'username', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        // if (!credentials?.email || !credentials?.password) {
+        //   // throw new Error('Invalid credentials')
+        //   return null
+        // }
+        // const existingUser = await db.user.findUnique({
+        //   where: {
+        //     email: credentials?.email,
+        //   },
+        // })
+        if (!credentials?.username || !credentials?.password) {
           // throw new Error('Invalid credentials')
           return null
         }
         const existingUser = await db.user.findUnique({
           where: {
-            email: credentials?.email,
+            username: credentials?.username,
           },
         })
         if (!existingUser || !existingUser?.hashedPassword) {
@@ -52,6 +54,15 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  session: {
+    strategy: 'jwt',
+  },
+
+  pages: {
+    signIn: '/sign-in',
+  },
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
