@@ -52,7 +52,8 @@ const SignInForm = () => {
     if (signInData?.error) {
       toast({
         title: 'Error',
-        description: 'Ooops! Something went wrong!',
+        description:
+          'Username and Password must exactly equal those registered!',
         variant: 'destructive',
       })
     } else {
