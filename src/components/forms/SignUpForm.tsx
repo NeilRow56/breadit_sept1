@@ -65,7 +65,7 @@ export const SignUpForm = () => {
     } else {
       toast({
         title: 'Error',
-        description: 'Ooops! Something went wrong!',
+        description: 'Username or email already taken!',
         variant: 'destructive',
       })
     }
