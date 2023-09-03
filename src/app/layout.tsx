@@ -4,7 +4,10 @@ import { Inter } from 'next/font/google'
 
 import Navbar from '@/components/Navbar'
 import { cn } from '@/lib/utils'
-import Providers from '@/providers/theme-provider'
+
+import { Toaster } from '@/components/ui/toaster'
+import ThemeContext from '@/providers/theme-provider'
+import AuthContext from '@/providers/auth-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,12 +31,15 @@ export default function RootLayout({
       )}
     >
       <body className="flex h-screen flex-col bg-gray-100 antialiased">
-        <Providers>
-          <Navbar />
-          <div className="container mx-auto flex max-w-7xl flex-grow  ">
-            {children}
-          </div>
-        </Providers>
+        <ThemeContext>
+          <AuthContext>
+            <Navbar />
+            <div className="container mx-auto flex max-w-7xl flex-grow  ">
+              {children}
+            </div>
+            <Toaster />
+          </AuthContext>
+        </ThemeContext>
       </body>
     </html>
   )

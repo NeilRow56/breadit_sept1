@@ -1,12 +1,20 @@
 import bcryptjs from 'bcryptjs'
-import NextAuth, { AuthOptions } from 'next-auth'
+import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { db } from './db'
 
-import { db } from '@/lib/db'
-
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
+
+  session: {
+    strategy: 'jwt',
+  },
+
+  pages: {
+    signIn: '/sign-in',
+  },
+
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -16,30 +24,55 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials')
+          // throw new Error('Invalid credentials')
+          return null
         }
-        const user = await db.user.findUnique({
+        const existingUser = await db.user.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials?.email,
           },
         })
-        if (!user || !user?.hashedPassword) {
-          throw new Error('Invalid credentials')
+        if (!existingUser || !existingUser?.hashedPassword) {
+          // throw new Error('Invalid credentials')
+          return null
         }
         const isCorrectPassword = await bcryptjs.compare(
           credentials.password,
-          user.hashedPassword
+          existingUser.hashedPassword
         )
         if (!isCorrectPassword) {
-          throw new Error('Invalid credentials')
+          // throw new Error('Invalid credentials')
+          return null
         }
-        return user
+        return {
+          id: `${existingUser.id}`,
+          username: existingUser.username,
+          email: existingUser.email,
+        }
       },
     }),
   ],
-  debug: process.env.NODE_ENV === 'development',
-  session: {
-    strategy: 'jwt',
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        return {
+          ...token,
+          username: user.username,
+        }
+      }
+      return token
+    },
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          username: token.username,
+        },
+      }
+    },
   },
+  debug: process.env.NODE_ENV === 'development',
+
   secret: process.env.NEXTAUTH_SECRET,
 }

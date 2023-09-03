@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { useToast } from '@/components/ui/use-toast'
 
 const FormSchema = z
   .object({
@@ -34,6 +35,7 @@ const FormSchema = z
 
 export const SignUpForm = () => {
   const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -61,7 +63,11 @@ export const SignUpForm = () => {
     if (response.ok) {
       router.push('/sign-in')
     } else {
-      console.error('Registration failed')
+      toast({
+        title: 'Error',
+        description: 'Ooops! Something went wrong!',
+        variant: 'destructive',
+      })
     }
   }
 
@@ -93,7 +99,7 @@ export const SignUpForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="font-semibold text-blue-800">
-                        Name
+                        Username
                       </FormLabel>
                       <FormControl>
                         <Input placeholder="johndoe" {...field} />
