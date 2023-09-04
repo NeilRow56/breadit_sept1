@@ -139,10 +139,7 @@ const SignInForm = () => {
             </div>
 
             <div className="flex w-full items-center justify-end space-x-2 pt-6">
-              <Button
-                className="w-full bg-blue-800 hover:bg-blue-500"
-                type="submit"
-              >
+              <Button className="w-full " type="submit">
                 Sign In
               </Button>
             </div>

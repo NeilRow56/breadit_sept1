@@ -30,7 +30,7 @@ export default function RootLayout({
         inter.className
       )}
     >
-      <body className="flex h-screen flex-col bg-gray-100 antialiased">
+      <body className="flex h-screen flex-col bg-slate-50 pt-12 antialiased">
         <ThemeContext>
           <AuthContext>
             <Navbar />

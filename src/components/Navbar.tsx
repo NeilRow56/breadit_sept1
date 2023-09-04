@@ -1,21 +1,24 @@
 import Link from 'next/link'
 import ThemeButton from './ThemeButton'
 import { buttonVariants } from './ui/button'
-import { HandMetal } from 'lucide-react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import UserAccountButton from './UserAccountButton'
+import { Icons } from './Icon'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
   return (
-    <header className="sticky top-0 z-[70] bg-slate-200 py-6 dark:bg-slate-700">
-      <nav className="container mx-auto flex items-center justify-between sm:px-48">
+    <header className="fixed inset-x-0 top-0 z-[70] h-fit border-b border-zinc-300 bg-zinc-100 py-2 dark:bg-slate-700">
+      <nav className="container mx-auto flex h-full items-center justify-between sm:px-48">
         <ul className="flex gap-6">
+          {/* Logo */}
           <li>
             <Link className="flex gap-2" href="/">
-              <HandMetal />
-              <h3 className="font-semibold text-blue-900">Home</h3>
+              <Icons.logo className="h-8 w-8 sm:h-6 sm:w-6" />
+              <h3 className="hidden font-semibold text-zinc-700 md:block ">
+                Breadit
+              </h3>
             </Link>
           </li>
         </ul>
