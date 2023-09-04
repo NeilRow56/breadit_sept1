@@ -18,6 +18,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
+import { Icons } from '../Icon'
 
 const FormSchema = z.object({
   // email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -64,6 +65,14 @@ const SignInForm = () => {
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mb-12 flex flex-col space-y-2 text-center">
+        <Icons.logo className="mx-auto h-6 w-6" />
+        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+        <p className="mx-auto max-w-xs text-sm">
+          By continuing, you are setting up a Breadit account and agree to our
+          User Agreement and Privacy Policy.
+        </p>
+      </div>
       <div
         className="
         bg-white
