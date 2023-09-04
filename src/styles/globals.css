@@ -79,5 +79,8 @@ body,
   }
   body {
     @apply bg-background text-foreground dark:bg-gray-800;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
