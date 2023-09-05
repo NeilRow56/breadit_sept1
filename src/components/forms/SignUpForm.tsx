@@ -4,7 +4,7 @@ import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { redirect } from 'next/navigation'
+
 import { Input } from '@/components/ui/input'
 import {
   Form,
@@ -74,7 +74,7 @@ export const SignUpForm = () => {
 
   return (
     <>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md ">
         <div className="mb-12 flex flex-col space-y-2 text-center">
           <Icons.logo className="mx-auto h-6 w-6" />
           <h1 className="text-2xl font-semibold tracking-tight">Welcome</h1>
