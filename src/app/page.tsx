@@ -7,7 +7,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions)
   return (
     <main className="flex flex-grow items-center ">
-      <div className="w-lg mx-auto text-center">
+      <div className=" mx-auto   text-center">
         <div className="rounded-lg bg-blue-500 p-2 px-4 text-white">
           <h1>Welcome to Home Page</h1>
         </div>
