@@ -18,8 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  authModal,
 }: {
   children: React.ReactNode
+  authModal: React.ReactNode
 }) {
   return (
     <html
@@ -34,6 +36,7 @@ export default function RootLayout({
         <ThemeContext>
           <AuthContext>
             <Navbar />
+            {authModal}
             <div className="container mx-auto flex max-w-7xl flex-grow  ">
               {children}
             </div>

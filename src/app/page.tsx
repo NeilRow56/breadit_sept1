@@ -13,7 +13,7 @@ export default async function Home() {
         </div>
         <div className="mt-4 rounded-md bg-green-200">
           <Link className="" href="/admin">
-            Admin Page 290
+            Admin Page Link
           </Link>
         </div>
         <div className="mt-4 rounded-md bg-blue-500 text-white">
