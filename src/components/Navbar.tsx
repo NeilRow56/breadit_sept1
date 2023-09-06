@@ -3,8 +3,8 @@ import ThemeButton from './ThemeButton'
 import { buttonVariants } from './ui/button'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import UserAccountButton from './UserAccountButton'
 import { Icons } from './Icon'
+import AccountUserNav from './AccountUserNav'
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
@@ -24,7 +24,7 @@ const Navbar = async () => {
         </ul>
         <ul className="flex items-center gap-4 ">
           {session?.user ? (
-            <UserAccountButton />
+            <AccountUserNav user={session.user} />
           ) : (
             <li>
               <Link className={buttonVariants()} href="/sign-in">

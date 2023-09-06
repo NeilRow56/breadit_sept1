@@ -102,10 +102,10 @@ export const authOptions: NextAuthOptions = {
 
       return {
         id: dbUser.id,
-        name: dbUser.useraccountname,
+        name: dbUser.username,
         email: dbUser.email,
         picture: dbUser.image,
-        username: dbUser.username,
+        // username: dbUser.username,
       }
     },
     // redirect() {
